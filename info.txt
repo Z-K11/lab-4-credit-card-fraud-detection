@@ -1,0 +1,2 @@
+paste the link below in your downloader's url section or in the address bar of the browser to get csv file 
+https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ML0101EN-SkillsNetwork/labs/Module%203/data/creditcard.csv
