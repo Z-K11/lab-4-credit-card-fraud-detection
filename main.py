@@ -71,3 +71,6 @@ print('Decision Tree Classifier snapml vs scikit learn speed up = : {0:.2f}x'.fo
 decision_tree_predict = decision_tree.predict_proba(x_test)[:,1]
 decision_tree_roc_score = roc_auc_score(y_test,decision_tree_predict)
 print('Sklearn decision tree classifier Roc score  {0:.3f}'.format(decision_tree_roc_score))
+snap_predict = snap_Tree.predict_proba(x_test)[:,1]
+snap_roc_score=roc_auc_score(y_test,snap_predict)
+print('Snap decisiont tree classifier roc scroe : {0:0.3f}'.format(snap_roc_score))
