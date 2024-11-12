@@ -11,8 +11,6 @@ from sklearn.metrics import roc_auc_score
 # data link
 #url= "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ML0101EN-SkillsNetwork/labs/Module%203/data/creditcard.csv"
 raw_data = pd.read_csv("creditcard.csv")
-print("There are " + str(len(raw_data)) + " observations in the credit card fraud dataset.")
-print("There are " + str(len(raw_data.columns)) + " variables in the dataset.")
 # Our data set has 284807 observations but in a real scenario a bank usually would have a larger data set compared to ours ?
 # To simulate such an experience we will inflate our data set with obersvations making it size 10 times bigger than the original
 multiplier = 10
@@ -21,3 +19,20 @@ inflated_data = pd.DataFrame(np.repeat(raw_data.values,multiplier,axis=0),column
 # axis = 0 means row this gets executed and then is used as a parameter for the function pd.DataFrame()
 # pd.DataFrame(n,columns=otherDataFrame.columns) takes arguement n converts it into pandas DataFrame the columns parameter ensures
 # that the new data frame has the same column as the set columns from original ? or any existing dataframe
+labels = inflated_data.Class.unique()
+# takes unique values from the Class column of the data set and assigns it to label
+sizes = inflated_data.Class.value_counts().values
+# takes the count for unique values in the Class column of the data frame and stores it as a anumpy array
+fig, ax = plt.subplots()
+ax.pie(sizes, labels=labels, autopct='%1.3f%%')
+ax.set_title('Target Variable Value Counts')
+#plt.savefig("results.png")
+# un-comment the above command and run it only once 
+# plt.hist(values,number of bins(as in towers),histogram type,color of the bins) is the syntax for a histogram
+plt.clf()
+# clears the plot for a new plot
+plt.hist(inflated_data.Amount.values,6,histtype='bar',facecolor='g')
+#plt.savefig("Amounts.png")
+print("Minimum amount value is ", np.min(inflated_data.Amount.values))
+print("Maximum amount value is ", np.max(inflated_data.Amount.values))
+print("90% of the transactions have an amount less or equal than ", np.percentile(raw_data.Amount.values, 90))
