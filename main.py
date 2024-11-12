@@ -9,6 +9,7 @@ from sklearn.preprocessing import normalize,StandardScaler
 from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.metrics import roc_auc_score
 from sklearn.tree import DecisionTreeClassifier
+from snapml import DecisionTreeClassifier as snamplDecisionTree
 # data link
 #url= "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ML0101EN-SkillsNetwork/labs/Module%203/data/creditcard.csv"
 raw_data = pd.read_csv("creditcard.csv")
@@ -52,4 +53,17 @@ train_weight = compute_sample_weight('balanced',y_train)
 # compute_sample_weight function calculates weight for training sample balanced option tells the function to to automatically 
 # calculate weights inversely proportional to class frequencies. This approach assigns higher weights to samples from 
 # underrepresented classes, making the model more sensitive to minority classes.
-# 
+decision_tree = DecisionTreeClassifier(max_depth=4,random_state=32)
+# max_depth 4 ensures the tree stays shallow and and is not very long solving the problem of over fitting 
+# if tree is short over fitting doesn't happen if it is long it handles complex data more profoundly 
+t0 = time.time()
+decision_tree.fit(x_train,y_train,sample_weight=train_weight)
+decision_tree_time = time.time() - t0
+print('Scikit Learn training time = {0:0.5f}'.format(decision_tree_time))
+snap_Tree = snamplDecisionTree(max_depth=4,random_state=45,n_jobs=12)
+t1 = time.time()
+snap_Tree.fit(x_train,y_train,sample_weight=train_weight)
+snapmlTime = time.time() - t1
+print('SnapML training time = {0:0.5f}'.format(snapmlTime))
+
+
