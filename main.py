@@ -36,3 +36,5 @@ plt.hist(inflated_data.Amount.values,6,histtype='bar',facecolor='g')
 print("Minimum amount value is ", np.min(inflated_data.Amount.values))
 print("Maximum amount value is ", np.max(inflated_data.Amount.values))
 print("90% of the transactions have an amount less or equal than ", np.percentile(raw_data.Amount.values, 90))
+inflated_data.iloc[:,1:30] = StandardScaler().fit_transform(inflated_data.iloc[:,1:30])
+# iloc selects rows and columns : means all rows 1:30 means from column 1 to 30 
