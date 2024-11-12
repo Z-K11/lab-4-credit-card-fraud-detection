@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import normalize,StandardScaler
 from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.metrics import roc_auc_score
+from sklearn.tree import DecisionTreeClassifier
 # data link
 #url= "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ML0101EN-SkillsNetwork/labs/Module%203/data/creditcard.csv"
 raw_data = pd.read_csv("creditcard.csv")
@@ -43,3 +44,12 @@ x = data_matrix[:,1:30]
 y = data_matrix[:,30]
 x= normalize(x,norm='l1')
 print(x.shape,y.shape)
+# [:,1] is going to select all rows and then second column 
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.3,random_state=42,stratify=y)
+print('X train shape ',x_train.shape,'Y train shape ',y_train.shape)
+print('X test shape ',x_test.shape,'Y test shape ',y_test.shape)
+train_weight = compute_sample_weight('balanced',y_train)
+# compute_sample_weight function calculates weight for training sample balanced option tells the function to to automatically 
+# calculate weights inversely proportional to class frequencies. This approach assigns higher weights to samples from 
+# underrepresented classes, making the model more sensitive to minority classes.
+# 
