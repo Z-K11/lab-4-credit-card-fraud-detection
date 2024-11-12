@@ -17,3 +17,7 @@ print("There are " + str(len(raw_data.columns)) + " variables in the dataset.")
 # To simulate such an experience we will inflate our data set with obersvations making it size 10 times bigger than the original
 multiplier = 10
 inflated_data = pd.DataFrame(np.repeat(raw_data.values,multiplier,axis=0),columns=raw_data.columns)
+# np.repeat will create a numpy array containing numpy values from raw_data dataframe repeat them (multiplier) number of times
+# axis = 0 means row this gets executed and then is used as a parameter for the function pd.DataFrame()
+# pd.DataFrame(n,columns=otherDataFrame.columns) takes arguement n converts it into pandas DataFrame the columns parameter ensures
+# that the new data frame has the same column as the set columns from original ? or any existing dataframe
