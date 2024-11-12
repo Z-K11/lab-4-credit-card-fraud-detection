@@ -68,3 +68,6 @@ snapmlTime = time.time() - t1
 print('SnapML training time = {0:0.5f}'.format(snapmlTime))
 train_speed_up = decision_tree_time/snapmlTime
 print('Decision Tree Classifier snapml vs scikit learn speed up = : {0:.2f}x'.format(train_speed_up))
+decision_tree_predict = decision_tree.predict_proba(x_test)[:,1]
+decision_tree_roc_score = roc_auc_score(y_test,decision_tree_predict)
+print('Sklearn decision tree classifier Roc score  {0:.3f}'.format(decision_tree_roc_score))
