@@ -58,6 +58,7 @@ decision_tree = DecisionTreeClassifier(max_depth=4,random_state=32)
 # if tree is short over fitting doesn't happen if it is long it handles complex data more profoundly 
 t0 = time.time()
 decision_tree.fit(x_train,y_train,sample_weight=train_weight)
+# training the decision tree of scikit learn decision tree classifier 
 decision_tree_time = time.time() - t0
 print('Scikit Learn training time = {0:0.5f}'.format(decision_tree_time))
 snap_Tree = snamplDecisionTree(max_depth=4,random_state=45,n_jobs=12)
@@ -65,5 +66,5 @@ t1 = time.time()
 snap_Tree.fit(x_train,y_train,sample_weight=train_weight)
 snapmlTime = time.time() - t1
 print('SnapML training time = {0:0.5f}'.format(snapmlTime))
-
-
+train_speed_up = decision_tree_time/snapmlTime
+print('Decision Tree Classifier snapml vs scikit learn speed up = : {0:.2f}x'.format(train_speed_up))
